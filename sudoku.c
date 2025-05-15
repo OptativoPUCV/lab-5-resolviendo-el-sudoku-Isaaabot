@@ -63,11 +63,11 @@ La salida del código con el estado de la figura es (submatriz del centro):
 */
 int is_valid(Node *n)
 {
-  for (int f = 0 ; f < 10 ; f++)
+  for (int f = 0 ; f < 9 ; f++)
   {
     int vistos[10] = {0} ;
 
-    for (int c = 0 ; c < 10 ; c++)
+    for (int c = 0 ; c < 9 ; c++)
     {
       int validar = n->sudo[f][c] ;
 
@@ -79,11 +79,11 @@ int is_valid(Node *n)
     
   }
 
-  for (int c = 0 ; c < 10 ; c++)
+  for (int c = 0 ; c < 9 ; c++)
   {
     int vistos[10] = {0} ;
 
-    for (int f = 0 ; f < 10 ; f++)
+    for (int f = 0 ; f < 9 ; f++)
     {
       int validar = n->sudo[f][c] ;
 
@@ -104,11 +104,11 @@ int is_valid(Node *n)
     printf("%d ",nodo->sudo[i][j]);
     if(p%3 == 2) printf("\n");
   */
-  for (int k = 0 ; k < 10 ; k++)
+  for (int k = 0 ; k < 9 ; k++)
   {
     int vistos[10] = {0} ;
 
-    for (int p = 0 ; p < 10 ; p++)
+    for (int p = 0 ; p < 9 ; p++)
     {
       int f = 3 * (k / 3) + (p / 3) ;
       int c = 3 * (k % 3) + (p % 3) ;
@@ -138,9 +138,9 @@ List *get_adj_nodes(Node *n)
   int fila = -1 ;
   int columna = -1 ;
 
-  for (int f = 0; f < 10; f++)
+  for (int f = 0; f < 9; f++)
   {
-    for (int c = 0; c < 10; c++)
+    for (int c = 0; c < 9; c++)
     {
       if (n->sudo[f][c] == 0)
       {
