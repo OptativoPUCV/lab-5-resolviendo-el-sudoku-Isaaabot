@@ -138,12 +138,14 @@ Utilice la función Node* copy(Node* n) para copiar nodos.
 List *get_adj_nodes(Node *n)
 {
   List *list = createList() ;
+
+  // variables que guardarán la posicion fila y columna de la primera celda vacia
   int fila = -1 ;
   int columna = -1 ;
 
-  for (int f = 0; f < 9; f++)
+  for (int f = 0; f < 9; f++) // indices del sudoku
   {
-    for (int c = 0; c < 9; c++)
+    for (int c = 0; c < 9; c++) // indices del sudoku
     {
       if (n->sudo[f][c] == 0)
       {
@@ -156,10 +158,7 @@ List *get_adj_nodes(Node *n)
       break ;
   }
   
-  //if (fila == -1)
-  //  return list ;
-
-  for (int k = 1 ; k <= 9 ; k++)
+  for (int k = 1 ; k <= 9 ; k++)  // valores permitidos en el sudoku
   {
     Node *nuevo_nodo = copy(n) ;
     nuevo_nodo->sudo[fila][columna] = k ;
