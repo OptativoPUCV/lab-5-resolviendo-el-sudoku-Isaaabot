@@ -63,7 +63,7 @@ La salida del código con el estado de la figura es (submatriz del centro):
 */
 int is_valid(Node *n)
 {
-  for (int f = 0 ; f < 9 ; f++)
+  for (int f = 0 ; f < 10 ; f++)
   {
     int vistos[10] = {0} ;
 
@@ -79,7 +79,7 @@ int is_valid(Node *n)
     
   }
 
-  for (int c = 0 ; c < 9 ; c++)
+  for (int c = 0 ; c < 10 ; c++)
   {
     int vistos[10] = {0} ;
 
@@ -104,11 +104,11 @@ int is_valid(Node *n)
     printf("%d ",nodo->sudo[i][j]);
     if(p%3 == 2) printf("\n");
   */
-  for (int k = 0 ; k < 9 ; k++)
+  for (int k = 0 ; k < 10 ; k++)
   {
     int vistos[10] = {0} ;
 
-    for (int p = 0 ; p < 9 ; p++)
+    for (int p = 0 ; p < 10 ; p++)
     {
       int f = 3 * (k / 3) + (p / 3) ;
       int c = 3 * (k % 3) + (p % 3) ;
@@ -135,13 +135,30 @@ Utilice la función Node* copy(Node* n) para copiar nodos.
 List *get_adj_nodes(Node *n)
 {
   List *list = createList() ;
-  int f = 0 ;
-  int c = 0 ;
+  int fila = -1 ;
+  int columna = -1 ;
+
+  for (int f = 0; f < 10; f++)
+  {
+    for (int c = 0; c < 10; c++)
+    {
+      if (n->sudo[f][c] == 0)
+      {
+        fila = f ;
+        columna = c ;
+        break ;
+      }
+      
+    }
+    if (fila != -1)
+      break ;
+  }
+  
 
   for (int k = 0 ; k < 10 ; k++)
   {
     Node *nuevo_nodo = copy(n) ;
-    nuevo_nodo->sudo[f][c] = k ;
+    nuevo_nodo->sudo[fila][columna] = k ;
 
     if (is_valid(nuevo_nodo))
       pushBack(list, nuevo_nodo) ;
