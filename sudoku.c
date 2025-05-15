@@ -54,14 +54,6 @@ Para marcar los números que vayan apareciendo en una fila/columna/submatriz pue
 10 inicializado con 0s. Cada vez que aparezca un número i, verifique que la casilla i del arreglo sea igual a 0, luego márquela 
 con un '1'. Si la casilla es '1' quiere decir que el número ya estaba marcado por lo que la fla/columna/submatriz no es válida.
 
-¿Cómo recorrer las submatrices de 3x3? El siguiente código se puede usar para recorrer los elementos de una sumbatriz k (por ejemplo k=4):
-
-int k=4,p; 
-for(p=0;p<9;p++){
-    int i=3*(k/3) + (p/3) ;
-    int j=3*(k%3) + (p%3) ;
-    printf("%d ",nodo->sudo[i][j]);
-    if(p%3 == 2) printf("\n");
 }
 La salida del código con el estado de la figura es (submatriz del centro):
 
@@ -71,7 +63,63 @@ La salida del código con el estado de la figura es (submatriz del centro):
 */
 int is_valid(Node *n)
 {
-  
+  for (int f = 0 ; f < 10 ; f++)
+  {
+    int vistos[10] = {0} ;
+
+    for (int c = 0 ; c < 10 ; c++)
+    {
+      int validar = n->sudo[f][c] ;
+
+      if (vistos[validar])  // si es true (1), quiere decir que esta repetido
+        return 0 ;
+      
+      vistos[validar] = 1 ;
+    }
+    
+  }
+
+  for (int c = 0 ; c < 10 ; c++)
+  {
+    int vistos[10] = {0} ;
+
+    for (int f = 0 ; f < 10 ; f++)
+    {
+      int validar = n->sudo[f][c] ;
+
+      if (vistos[validar])  // si es true (1), quiere decir que esta repetido
+        return 0 ;
+      
+      vistos[validar] = 1 ;
+    }
+  }
+
+  /*
+  ¿Cómo recorrer las submatrices de 3x3? El siguiente código se puede usar para recorrer los elementos de una sumbatriz k (por ejemplo k=4):
+
+  int k=4,p; 
+  for(p=0;p<9;p++){
+    int i=3*(k/3) + (p/3) ;
+    int j=3*(k%3) + (p%3) ;
+    printf("%d ",nodo->sudo[i][j]);
+    if(p%3 == 2) printf("\n");
+  */
+  for (int k = 0 ; k < 10 ; k++)
+  {
+    int vistos[10] = {0} ;
+
+    for (int p = 0 ; p < 10 ; p++)
+    {
+      int f = 3 * (k / 3) + (p / 3) ;
+      int c = 3 * (k % 3) + (p % 3) ;
+      int validar = n->sudo[f][c] ;
+
+      if (vistos[validar])  // si es true (1), quiere decir que esta repetido
+        return 0 ;
+      
+      vistos[validar] = 1 ;
+    }
+  }
   return 1 ;
 }
 
