@@ -71,6 +71,9 @@ int is_valid(Node *n)
     {
       int validar = n->sudo[f][c] ;
 
+      if (validar == 0)
+        continue ;
+
       if (vistos[validar])  // si es true (1), quiere decir que esta repetido
         return 0 ;
       
@@ -86,6 +89,9 @@ int is_valid(Node *n)
     for (int f = 0 ; f < 9 ; f++)
     {
       int validar = n->sudo[f][c] ;
+
+      if (validar == 0)
+        continue ;
 
       if (vistos[validar])  // si es true (1), quiere decir que esta repetido
         return 0 ;
@@ -114,6 +120,9 @@ int is_valid(Node *n)
       int c = 3 * (k % 3) + (p % 3) ;
       int validar = n->sudo[f][c] ;
 
+      if (validar == 0)
+        continue ;
+        
       if (vistos[validar])  // si es true (1), quiere decir que esta repetido
         return 0 ;
       
