@@ -148,7 +148,6 @@ List *get_adj_nodes(Node *n)
         columna = c ;
         break ;
       }
-      
     }
     if (fila != -1)
       break ;
@@ -157,7 +156,7 @@ List *get_adj_nodes(Node *n)
   if (fila == -1)
     return list ;
 
-  for (int k = 0 ; k < 10 ; k++)
+  for (int k = 1 ; k <= 9 ; k++)
   {
     Node *nuevo_nodo = copy(n) ;
     nuevo_nodo->sudo[fila][columna] = k ;
@@ -213,7 +212,7 @@ Node *DFS(Node *initial, int *cont)
   return NULL ;
 }
 
-
+/*
 int main( int argc, char *argv[] ){
 
   Node* initial= read_file("s12a.txt");;
@@ -225,5 +224,5 @@ int main( int argc, char *argv[] ){
 
   return 0;
 }
-
+*/
 //Compile: gcc sudoku -o sudoku y ejecute: ./sudoku
