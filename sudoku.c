@@ -71,8 +71,8 @@ La salida del código con el estado de la figura es (submatriz del centro):
 */
 int is_valid(Node *n)
 {
-
-    return 1 ;
+  
+  return 1 ;
 }
 
 /*
@@ -86,12 +86,24 @@ Utilice la función Node* copy(Node* n) para copiar nodos.
 */
 List *get_adj_nodes(Node *n)
 {
-    List *list = createList() ;
+  List *list = createList() ;
+  int f = 0 ;
+  int c = 0 ;
 
-    //obtenga los nodos adyacentes a n
-    //y agréguelos a la lista
+  for (int k = 0 ; k < 10 ; k++)
+  {
+    Node *nuevo_nodo = copy(n) ;
+    nuevo_nodo->sudo[f][c] = k ;
 
-    return list ;
+    if (is_valid(nuevo_nodo))
+      pushBack(list, nuevo_nodo) ;
+    else
+      free(nuevo_nodo) ;
+  }
+  //obtenga los nodos adyacentes a n
+  //y agréguelos a la lista
+
+  return list ;
 }
 
 /*
@@ -101,7 +113,7 @@ Ya está listo el grafo implícito, ahora necesitamos construir un método de b�
 */
 int is_final(Node *n)
 {
-    return 0 ;
+  return 0 ;
 }
 
 /*
