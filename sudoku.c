@@ -128,12 +128,10 @@ int is_valid(Node *n)
 
 /*
 1.Cree una función que a partir de un nodo genere una lista con los nodos adyacentes:
-- Recuerde que los nodos adyacentes son generados aplicando las acciones al estado actual.
-- Para el caso del ejemplo, la función debería retornar una lista con 9 nodos. Cada uno de ellos idéntico al nodo original 
-pero cambiando el valor de la primera casilla vacía, es decir: sudo[0][2], por 1, 2, ..., 9.
+  - Recuerde que los nodos adyacentes son generados aplicando las acciones al estado actual.
+  - Para el caso del ejemplo, la función debería retornar una lista con 9 nodos. Cada uno de ellos idéntico al nodo original 
+  pero cambiando el valor de la primera casilla vacía, es decir: sudo[0][2], por 1, 2, ..., 9.
 Utilice la función Node* copy(Node* n) para copiar nodos.
-
-3.Modifique la función get_adj_nodes para que sólo los nodos válidos sean retornados (use la función is_valid).
 */
 List *get_adj_nodes(Node *n)
 {
@@ -159,20 +157,18 @@ List *get_adj_nodes(Node *n)
       break ;
   }
   
+  // 3. Modifique la función get_adj_nodes para que sólo los nodos válidos sean retornados (use la función is_valid).
   for (int k = 1 ; k < 10 ; k++)  // valores permitidos en el sudoku (del 1 al 9)
   {
-    Node *nuevo_nodo = copy(n) ;
-    nuevo_nodo->sudo[fila][columna] = k ;
+    Node *nuevo_nodo = copy(n) ;  // Creo nuevo_nodo y utilizo la funcion "copy" para copiar el nodo n en nuevo_nodo
+    nuevo_nodo->sudo[fila][columna] = k ; // Le damos el valor de k a la celda vacia
 
-    if (is_valid(nuevo_nodo))
-      pushBack(list, nuevo_nodo) ;
-    else
-      free(nuevo_nodo) ;
+    if (is_valid(nuevo_nodo)) // Si es valido el nodo
+      pushBack(list, nuevo_nodo) ;  // Insertamos el nodo en la lista
+    else  // Si no es valido
+      free(nuevo_nodo) ;  // Lo liberamos
   }
-  //obtenga los nodos adyacentes a n
-  //y agréguelos a la lista
-
-  return list ;
+  return list ; // Retornamos la lista
 }
 
 /*
