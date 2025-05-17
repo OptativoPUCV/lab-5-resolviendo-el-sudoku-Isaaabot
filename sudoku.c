@@ -215,7 +215,7 @@ Node *DFS(Node *initial, int *cont)
   Stack *s = createStack() ;
   push(s, initial) ;
 
-  while (is_empty(s) != NULL)
+  while (!is_empty(s))
   {
     Node *primer_nodo = top(s) ;
     pop(s) ;
