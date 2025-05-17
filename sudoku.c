@@ -212,37 +212,37 @@ El algoritmo es el siguiente:
   - Si terminó de recorre el grafo sin encontrar una solución, retorne NULL.
   - Almacene en la variable cont, la cantidad de iteraciones que realiza el algoritmo.
 */
-
 Node *DFS(Node *initial, int *cont)
 {
-  Stack *s = createStack() ;
-  *cont = 0 ;
-  push(s, initial) ;
+  Stack *s = createStack() ;  // Creo un Stack s (pila)
+  *cont = 0 ; // Inicializo el contador en 0
+  push(s, initial) ;  // Inserto el nodo en la pila
 
-  while (!is_empty(s))
+  while (!is_empty(s))  // Mientras la pila no se encuentre vacía
   {
-    Node *primer_nodo = top(s) ;
-    pop(s) ;
-    (*cont)++ ;
+    Node *primer_nodo = top(s) ;  // Creo nodo "primer_nodo" y le asigno el primer nodo de la pila s
+    pop(s) ;  // Elimino el primer nodo de la pila s
+    (*cont)++ ; // Aumento el contador en 1 por cada iteración
     
-    if (is_final(primer_nodo))
-      return primer_nodo ;
+    if (is_final(primer_nodo))  // Verifico si corresponde a un estado final
+      return primer_nodo ;  // Si es así, retorno el nodo
 
-    List *adyacentes = get_adj_nodes(primer_nodo) ;
-    Node *nodo_adyacente = first(adyacentes) ;
+    List *adyacentes = get_adj_nodes(primer_nodo) ; // Creo lista "adyacentes" y le asigno los nodos adyacentes al nodo con "get_adj_nodes"
+    Node *nodo_adyacente = first(adyacentes) ;  // Creo "nodo_adyacente" y le asigno el primer adyacente de la lista "adyacentes"
 
-    while (nodo_adyacente != NULL)
+    while (nodo_adyacente != NULL)  // Mientras sea distinto de NULL
     {
-      push(s, nodo_adyacente) ;
-      nodo_adyacente = next(adyacentes) ;
+      push(s, nodo_adyacente) ; // Inserto los nodos de la lista al stack "s"
+      nodo_adyacente = next(adyacentes) ; // Y paso al siguiente (se agregan uno por uno)
     }
-    free(primer_nodo) ;
-    free(adyacentes) ; 
+    free(primer_nodo) ; // Libero la memoria usada por el nodo
+    free(adyacentes) ;  // Libero la memoria usada por la lista
   }
   
-  return NULL ;
+  return NULL ; // No se encontró solución
 }
 
+/*
 int main( int argc, char *argv[] ){
 
   Node* initial= read_file("s12a.txt");;
@@ -254,5 +254,4 @@ int main( int argc, char *argv[] ){
 
   return 0;
 }
-
-//Compile: gcc sudoku -o sudoku y ejecute: ./sudoku
+*/
