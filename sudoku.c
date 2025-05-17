@@ -180,7 +180,7 @@ valores de la matriz son distintos a 0) y 0 en caso contrario.
 */
 int is_final(Node *n)
 {
-  /*
+  
   for (int f = 0 ; f < 9 ; f++)
   {
     for (int c = 0 ; c < 9 ; c++)
@@ -193,8 +193,6 @@ int is_final(Node *n)
   }
   
   return 1 ;
-  */
-  return 0 ;
 }
 
 /*
