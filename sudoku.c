@@ -57,11 +57,12 @@ con un '1'. Si la casilla es '1' quiere decir que el número ya estaba marcado p
 */
 int is_valid(Node *n)
 {
-  for (int f = 0 ; f < 9 ; f++) // Indices fila del sudoku
+  // Verificacion de que no se repitan números en las filas.
+  for (int f = 0 ; f < 9 ; f++) // Indices fila del sudoku (del 0 al 8)
   {
     int vistos[10] = {0} ;  // Arreglo para saber si se repite un valor dentro de la matriz
 
-    for (int c = 0 ; c < 9 ; c++) // Indices columna del sudoku
+    for (int c = 0 ; c < 9 ; c++) // Indices columna del sudoku (del 0 al 8)
     {
       int validar = n->sudo[f][c] ; // Variable "validar" que me dirá el valor de la celda
 
@@ -75,11 +76,12 @@ int is_valid(Node *n)
     }
   }
 
-  for (int c = 0 ; c < 9 ; c++) // Indices columna del sudoku
+  // Verificacion de que no se repitan números en las columnas.
+  for (int c = 0 ; c < 9 ; c++) // Indices columna del sudoku (del 0 al 8)
   {
     int vistos[10] = {0} ;  // Arreglo para saber si se repite un valor dentro de la matriz
 
-    for (int f = 0 ; f < 9 ; f++) // nIdices fila del sudoku  
+    for (int f = 0 ; f < 9 ; f++) // nIdices fila del sudoku (del 0 al 8)
     {
       int validar = n->sudo[f][c] ; // Variable "validar" que me dirá el valor de la celda
 
@@ -105,11 +107,12 @@ int is_valid(Node *n)
       if(p%3 == 2) printf("\n");
     }
   */
-  for (int k = 0 ; k < 9 ; k++) // Indices fila del sudoku
+  // Verificacion de que no se repitan números en las submatrices de 3x3.
+  for (int k = 0 ; k < 9 ; k++) // Indices fila del sudoku (del 0 al 8)
   {
     int vistos[10] = {0} ;  // Arreglo para saber si se repite un valor dentro de la matriz
 
-    for (int p = 0 ; p < 9 ; p++) // Indices columna del sudoku
+    for (int p = 0 ; p < 9 ; p++) // Indices columna del sudoku (del 0 al 8)
     {
       // Código dado para recorrer submatrices de 3x3
       int f = 3 * (k / 3) + (p / 3) ;
@@ -126,6 +129,7 @@ int is_valid(Node *n)
       vistos[validar] = 1 ; // Si no esta repetido, marcamos la casilla con un 1, para saber que ya lo vimos
     }
   }
+
   return 1 ; // Es valido
 }
 
@@ -144,9 +148,9 @@ List *get_adj_nodes(Node *n)
   int fila = -1 ;
   int columna = -1 ;
 
-  for (int f = 0; f < 9; f++) // Indices fila del sudoku
+  for (int f = 0; f < 9; f++) // Indices fila del sudoku (del 0 al 8)
   {
-    for (int c = 0; c < 9; c++) // Indices columna del sudoku
+    for (int c = 0; c < 9; c++) // Indices columna del sudoku (del 0 al 8)
     {
       if (n->sudo[f][c] == 0) // Encontramos la primera celda vacia (0)
       {
@@ -171,28 +175,27 @@ List *get_adj_nodes(Node *n)
     else  // Si no es valido
       free(nuevo_nodo) ;  // Lo liberamos
   }
+
   return list ; // Retornamos la lista
 }
 
 /*
-4.Implemente la función int is_final(Node * n). Esta función retorna 1 si el nodo corresponde a un nodo final (es decir, todos los 
+4.Implemente la función int is_final(Node *n). Esta función retorna 1 si el nodo corresponde a un nodo final (es decir, todos los 
 valores de la matriz son distintos a 0) y 0 en caso contrario.
 */
 int is_final(Node *n)
 {
   
-  for (int f = 0 ; f < 9 ; f++)
+  for (int f = 0 ; f < 9 ; f++) // Indices fila del sudoku (del 0 al 8)
   {
-    for (int c = 0 ; c < 9 ; c++)
+    for (int c = 0 ; c < 9 ; c++) // Indices columna del sudoku (del 0 al 8)
     {
-      if (n->sudo[f][c] == 0)
-      {
-        return 0 ;
-      }
+      if (!n->sudo[f][c]) // Si la celda es 0 (celda vacía)
+        return 0 ;  // No corresponde a un nodo final (valores distintos de 0)
     }
   }
   
-  return 1 ;
+  return 1 ;  // Corresponde a un nodo final (valores distintos de 0)
 }
 
 /*
