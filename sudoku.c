@@ -143,22 +143,23 @@ List *get_adj_nodes(Node *n)
   int fila = -1 ;
   int columna = -1 ;
 
-  for (int f = 0; f < 9; f++) // indices del sudoku
+  for (int f = 0; f < 9; f++) // indices fila del sudoku
   {
-    for (int c = 0; c < 9; c++) // indices del sudoku
+    for (int c = 0; c < 9; c++) // indices columna del sudoku
     {
-      if (n->sudo[f][c] == 0)
+      if (n->sudo[f][c] == 0) // Encontramos la primera celda vacia (0)
       {
+        // Le asignamos a fila y columna la posicion (f y c) de la celda vacia
         fila = f ;
         columna = c ;
         break ;
       }
     }
-    if (fila != -1)
+    if (fila != -1) // Condicion para terminar el bucle de filas
       break ;
   }
   
-  for (int k = 1 ; k <= 9 ; k++)  // valores permitidos en el sudoku
+  for (int k = 1 ; k < 10 ; k++)  // valores permitidos en el sudoku (del 1 al 9)
   {
     Node *nuevo_nodo = copy(n) ;
     nuevo_nodo->sudo[fila][columna] = k ;
