@@ -213,12 +213,14 @@ El algoritmo es el siguiente:
 Node *DFS(Node *initial, int *cont)
 {
   Stack *s = createStack() ;
+  *cont = 0 ;
   push(s, initial) ;
 
   while (!is_empty(s))
   {
     Node *primer_nodo = top(s) ;
     pop(s) ;
+    (*cont)++ ;
     
     if (is_final(primer_nodo))
       return primer_nodo ;
