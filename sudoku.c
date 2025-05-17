@@ -209,13 +209,13 @@ El algoritmo es el siguiente:
   - Si terminó de recorre el grafo sin encontrar una solución, retorne NULL.
   - Almacene en la variable cont, la cantidad de iteraciones que realiza el algoritmo.
 */
-/*
+
 Node *DFS(Node *initial, int *cont)
 {
 
   return NULL ;
 }
-*/
+
 /*
 int main( int argc, char *argv[] ){
 
