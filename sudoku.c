@@ -42,12 +42,13 @@ void print_node(Node* n){
     }
     printf("\n");
 }
+
 /*
-2.Cree la función int is_valid(Node * n), para validar si un estado/nodo es válido (cumple con las restricciones del problema). 
+2.Cree la función int is_valid(Node *n), para validar si un estado/nodo es válido (cumple con las restricciones del problema). 
 Debe validar que:
-  - No se repitan números en las filas
-  - No se repitan números en las columnas
-  - No se repitan números en las submatrices de 3x3
+  - No se repitan números en las filas.
+  - No se repitan números en las columnas.
+  - No se repitan números en las submatrices de 3x3.
 Si el estado es válido la función retorna 1, si no lo es retorna 0.
 
 Para marcar los números que vayan apareciendo en una fila/columna/submatriz puede usar un arreglo de enteros de largo 
@@ -56,39 +57,39 @@ con un '1'. Si la casilla es '1' quiere decir que el número ya estaba marcado p
 */
 int is_valid(Node *n)
 {
-  for (int f = 0 ; f < 9 ; f++)
+  for (int f = 0 ; f < 9 ; f++) // Indices fila del sudoku
   {
-    int vistos[10] = {0} ;
+    int vistos[10] = {0} ;  // Arreglo para saber si se repite un valor dentro de la matriz
 
-    for (int c = 0 ; c < 9 ; c++)
+    for (int c = 0 ; c < 9 ; c++) // Indices columna del sudoku
     {
-      int validar = n->sudo[f][c] ;
+      int validar = n->sudo[f][c] ; // Variable "validar" que me dirá el valor de la celda
 
-      if (validar == 0) // como la celda es 0, salta la validación
+      if (!validar) // Como la celda es 0, salta la validación (celda vacía)
         continue ;
 
-      if (vistos[validar])  // si es true (1), quiere decir que esta repetido
-        return 0 ;
+      if (vistos[validar])  // Si es true (1), quiere decir que esta repetido
+        return 0 ;  // No valido
       
-      vistos[validar] = 1 ;
+      vistos[validar] = 1 ; // Si no esta repetido, marcamos la casilla con un 1, para saber que ya lo vimos
     }
   }
 
-  for (int c = 0 ; c < 9 ; c++)
+  for (int c = 0 ; c < 9 ; c++) // Indices columna del sudoku
   {
-    int vistos[10] = {0} ;
+    int vistos[10] = {0} ;  // Arreglo para saber si se repite un valor dentro de la matriz
 
-    for (int f = 0 ; f < 9 ; f++)
+    for (int f = 0 ; f < 9 ; f++) // nIdices fila del sudoku  
     {
-      int validar = n->sudo[f][c] ;
+      int validar = n->sudo[f][c] ; // Variable "validar" que me dirá el valor de la celda
 
-      if (validar == 0) // como la celda es 0, salta la validación
+      if (!validar) // Como la celda es 0, salta la validación (celda vacía)
         continue ;
 
-      if (vistos[validar])  // si es true (1), quiere decir que esta repetido
-        return 0 ;
+      if (vistos[validar])  // Si es true (1), quiere decir que esta repetido
+        return 0 ;  // No valido
       
-      vistos[validar] = 1 ;
+      vistos[validar] = 1 ; // Si no esta repetido, marcamos la casilla con un 1, para saber que ya lo vimos
     }
   }
 
@@ -104,46 +105,48 @@ int is_valid(Node *n)
       if(p%3 == 2) printf("\n");
     }
   */
-  for (int k = 0 ; k < 9 ; k++)
+  for (int k = 0 ; k < 9 ; k++) // Indices fila del sudoku
   {
-    int vistos[10] = {0} ;
+    int vistos[10] = {0} ;  // Arreglo para saber si se repite un valor dentro de la matriz
 
-    for (int p = 0 ; p < 9 ; p++)
+    for (int p = 0 ; p < 9 ; p++) // Indices columna del sudoku
     {
+      // Código dado para recorrer submatrices de 3x3
       int f = 3 * (k / 3) + (p / 3) ;
       int c = 3 * (k % 3) + (p % 3) ;
-      int validar = n->sudo[f][c] ;
 
-      if (validar == 0) // como la celda es 0, salta la validación
+      int validar = n->sudo[f][c] ; // Variable "validar" que me dirá el valor de la celda
+
+      if (!validar) // Como la celda es 0, salta la validación (celda vacía)
         continue ;
 
-      if (vistos[validar])  // si es true (1), quiere decir que esta repetido
-        return 0 ;
+      if (vistos[validar])  // Si es true (1), quiere decir que esta repetido
+        return 0 ;  // No valido
       
-      vistos[validar] = 1 ;
+      vistos[validar] = 1 ; // Si no esta repetido, marcamos la casilla con un 1, para saber que ya lo vimos
     }
   }
-  return 1 ;
+  return 1 ; // Es valido
 }
 
 /*
-1.Cree una función que a partir de un nodo genere una lista con los nodos adyacentes:
+1. Cree una función que a partir de un nodo genere una lista con los nodos adyacentes:
   - Recuerde que los nodos adyacentes son generados aplicando las acciones al estado actual.
   - Para el caso del ejemplo, la función debería retornar una lista con 9 nodos. Cada uno de ellos idéntico al nodo original 
   pero cambiando el valor de la primera casilla vacía, es decir: sudo[0][2], por 1, 2, ..., 9.
-Utilice la función Node* copy(Node* n) para copiar nodos.
+Utilice la función Node *copy(Node *n) para copiar nodos.
 */
 List *get_adj_nodes(Node *n)
 {
   List *list = createList() ;
 
-  // variables que guardarán la posicion fila y columna de la primera celda vacia
+  // Variables que guardarán la posicion fila y columna de la primera celda vacia
   int fila = -1 ;
   int columna = -1 ;
 
-  for (int f = 0; f < 9; f++) // indices fila del sudoku
+  for (int f = 0; f < 9; f++) // Indices fila del sudoku
   {
-    for (int c = 0; c < 9; c++) // indices columna del sudoku
+    for (int c = 0; c < 9; c++) // Indices columna del sudoku
     {
       if (n->sudo[f][c] == 0) // Encontramos la primera celda vacia (0)
       {
@@ -158,7 +161,7 @@ List *get_adj_nodes(Node *n)
   }
   
   // 3. Modifique la función get_adj_nodes para que sólo los nodos válidos sean retornados (use la función is_valid).
-  for (int k = 1 ; k < 10 ; k++)  // valores permitidos en el sudoku (del 1 al 9)
+  for (int k = 1 ; k < 10 ; k++)  // Valores permitidos en el sudoku (del 1 al 9)
   {
     Node *nuevo_nodo = copy(n) ;  // Creo nuevo_nodo y utilizo la funcion "copy" para copiar el nodo n en nuevo_nodo
     nuevo_nodo->sudo[fila][columna] = k ; // Le damos el valor de k a la celda vacia
