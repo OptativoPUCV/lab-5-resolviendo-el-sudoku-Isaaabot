@@ -120,3 +120,14 @@ Sat, May 17, 2025 10:41:24 AM:
  tests:  7|1
 total_score: 55/70
 a789e06
+Sat, May 17, 2025 11:29:25 AM: 
+ sudoku.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+Compilation failed
+In file included from test.c:5:0:
+sudoku.c: In function 'DFS':
+sudoku.c:218:22: error: comparison between pointer and integer [-Werror]
+   while (is_empty(s) != NULL)
+                      ^~
+cc1.exe: all warnings being treated as errors
+af79fa0

@@ -212,7 +212,29 @@ El algoritmo es el siguiente:
 
 Node *DFS(Node *initial, int *cont)
 {
+  Stack *s = createStack() ;
+  push(s, initial) ;
 
+  while (is_empty(s) != NULL)
+  {
+    Node *primer_nodo = top(s) ;
+    pop(s) ;
+    
+    if (is_final(primer_nodo))
+      return primer_nodo ;
+
+    List *adyacentes = get_adj_nodes(primer_nodo) ;
+    Node *nodo_adyacente = first(adyacentes) ;
+
+    while (nodo_adyacente != NULL)
+    {
+      push(s, nodo_adyacente) ;
+      nodo_adyacente = next(adyacentes) ;
+    }
+    free(primer_nodo) ;
+    free(adyacentes) ; 
+  }
+  
   return NULL ;
 }
 
